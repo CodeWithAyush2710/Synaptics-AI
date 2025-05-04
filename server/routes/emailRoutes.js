@@ -5,4 +5,4 @@ const { protect } = require('../middleware/authMiddleware');
 
 router.post('/generate', protect, generateEmails);
 
-module.exports = router
+module.exports = router;

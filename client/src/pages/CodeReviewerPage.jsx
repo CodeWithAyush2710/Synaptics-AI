@@ -20,7 +20,7 @@ const CodeReviewerPage = () => {
 
   async function reviewCode() {
     try {
-      const response = await axios.post('http://localhost:3000/ai/get-review', { code })
+      const response = await axios.post('http://localhost:3000/api/review', { code })
       setReview(response.data)
     } catch (err) {
       console.error('Error reviewing code', err)
