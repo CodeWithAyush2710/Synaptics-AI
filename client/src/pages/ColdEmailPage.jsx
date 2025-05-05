@@ -235,7 +235,10 @@ import React from 'react';
 import EmailGenerator from '../components/EmailGenerator';
 import { MessageSquare, Mail, Zap } from 'lucide-react';
 
+
+
 function ColdEmailPage() {
+
   return (
     <>
       <div className="min-h-screen flex flex-col bg-slate-50 text-gray-800">

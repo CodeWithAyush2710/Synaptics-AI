@@ -98,7 +98,7 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
           
-          <Link to="/documentation" className="text-neutral-700 hover:text-primary-600 transition-colors">Documentation</Link>
+          {/* <Link to="/documentation" className="text-neutral-700 hover:text-primary-600 transition-colors">Documentation</Link> */}
         </div>
 
         <div className="hidden md:flex items-center space-x-4">

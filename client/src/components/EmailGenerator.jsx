@@ -206,7 +206,56 @@ import FileUpload from './FileUpload';
 import JobLinkInput from './JobLinkInput';
 import { Loader2 } from 'lucide-react';
 import EmailResult from './EmailResult';
-import { generateEmail } from '../services/api';
+// import { generateEmail } from '../services/api';
+
+// Helper: Generate email by calling backend API
+const generateEmail = async (jobLink, resumeFile) => {
+  const formData = new FormData();
+  formData.append('url', jobLink);
+  if (resumeFile) {
+    formData.append('resume', resumeFile);
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/api/email', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      // Attempt to get error message from backend response body
+      let errorMsg = `HTTP error! Status: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        errorMsg = errorData.error || JSON.stringify(errorData); // Use specific 'error' field if available
+      } catch (e) {
+        // Ignore if response body is not JSON
+        console.warn("Could not parse error response as JSON.");
+      }
+      console.error("Backend request failed:", errorMsg);
+      return `Error: ${errorMsg}`; // Return error message to display
+    }
+
+    // Try parsing the successful response as JSON
+    let data;
+    try {
+      data = await response.json();
+    } catch (e) {
+      console.error("Failed to parse JSON response:", e);
+      return "Error: Failed to parse server response.";
+    }
+    
+    // Check if email field exists, otherwise use fallback (should ideally not happen now)
+    if (!data.email) {
+        console.warn("Backend response OK, but 'email' field is missing or empty in data:", data);
+    }
+    return data.email || 'No email generated (unexpected fallback)'; // Modified fallback message
+
+  } catch (error) {
+      console.error("Network error or fetch failed:", error);
+      return `Network Error: ${error.message}`;
+  }
+};
 
 function EmailGenerator() {
   const [formData, setFormData] = useState({
@@ -248,20 +297,21 @@ function EmailGenerator() {
       setGeneratedEmail(email);
     } catch (error) {
       console.error('Error generating email:', error);
+      setGeneratedEmail('Error generating email. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleJobLinkChange = (value) => {
-    setFormData({ ...formData, jobLink: value });
+  const handleJobLinkChange = (e) => {
+    setFormData({ ...formData, jobLink: e.target.value });
     if (errors.jobLink) {
       setErrors({ ...errors, jobLink: '' });
     }
   };
 
-  const handleFileChange = (file) => {
-    setFormData({ ...formData, resumeFile: file });
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, resumeFile: e.target.files[0] });
   };
 
   const resetForm = () => {
@@ -271,7 +321,7 @@ function EmailGenerator() {
     });
     setGeneratedEmail(null);
     setErrors({});
-  };
+  };  
 
   return (
     <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-200">
@@ -328,4 +378,3 @@ function EmailGenerator() {
 }
 
 export default EmailGenerator;
-

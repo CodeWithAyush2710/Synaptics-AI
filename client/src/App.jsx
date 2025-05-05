@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Services from './pages/Services';
-import Documentation from './pages/Documentation';
+// import Documentation from './pages/Documentation';
 import Auth from './pages/Auth';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:service" element={<Services />} />
-          <Route path="/documentation" element={<Documentation />} />
+          {/* <Route path="/documentation" element={<Documentation />} /> */}
           <Route path="/login" element={<Auth />} />
           <Route path="/signup" element={<Auth />} />
         </Routes>
