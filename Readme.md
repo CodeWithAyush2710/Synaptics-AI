@@ -104,28 +104,9 @@ Once the application is running, you can:
 
 * **Generate Cold Emails:** Navigate to the email generation section, provide your inputs (e.g., recipient details, purpose, key points), and let the AI draft a compelling email for you.
 * **Review Code:** Upload or paste your code snippets into the code review tool to receive AI-powered suggestions and analysis.
-* **(Add specific steps for any other features you implement)**
 
-## Contributing
-
-We welcome contributions to Synaptics AI! If you have ideas for new features, improvements, or bug fixes, please feel free to:
-
-1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/your-feature-name`).
-3.  Make your changes.
-4.  Commit your changes (`git commit -m 'feat: Add new feature'`).
-5.  Push to the branch (`git push origin feature/your-feature-name`).
-6.  Open a Pull Request.
-
-Please ensure your code adheres to the project's coding standards and includes appropriate tests.
 
 ## License
 
 This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT). 
 
-## Contact
-
-For any questions or feedback, feel free to reach out:
-
-* **Ayush Srivastava** - [GitHub Profile](https://github.com/CodeWithAyush2710)
-* **Project Link:** <https://github.com/CodeWithAyush2710/Synaptics-AI>
